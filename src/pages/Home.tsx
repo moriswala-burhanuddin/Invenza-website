@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, useScroll, useTransform, useSpring, useTime } from 'framer-motion';
 import { Play, Sparkles, Code, Terminal, Copy, Upload, Command, CornerDownLeft, Box, Circle, Diamond, LayoutGrid, Wand2, Monitor, Undo2, FolderOpen, Pen, Star, Server, Shield, Lock as LockIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Testimonials from '../components/sections/Testimonials';
 import invenzaLogo from '../assets/invenza-bg.png';
 
 // ---------------------------------------------------------
@@ -891,6 +892,9 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* ===== 4.5 TESTIMONIALS SECTION ===== */}
+      <Testimonials />
 
       {/* ===== 5. DOWNLOAD SECTION (Interactive Cursor Particles) ===== */}
       <section className="py-20 px-4 sm:px-8 bg-[#F8F9FA]">

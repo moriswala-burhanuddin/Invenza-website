@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { ReactLenis } from 'lenis/react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 
@@ -28,8 +29,9 @@ const Layout = () => (
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
+    <ReactLenis root options={{ lerp: 0.12, duration: 1.5, smoothWheel: true, wheelMultiplier: 1.2 }}>
+      <Router>
+        <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           
@@ -51,7 +53,8 @@ export default function App() {
         
         {/* Catch all */}
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
+    </ReactLenis>
   );
 }
