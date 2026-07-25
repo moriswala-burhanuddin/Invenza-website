@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
 
@@ -33,6 +33,7 @@ const testimonials = [
 const RibbonCanvas = ({ containerRef }: { containerRef: React.RefObject<HTMLElement | null> }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
+  const isVisibleRef = useRef(true);
   const mouseRef = useRef({ x: -1000, y: -1000, targetX: -1000, targetY: -1000, active: false });
   const timeRef = useRef(0);
 
@@ -90,7 +91,20 @@ const RibbonCanvas = ({ containerRef }: { containerRef: React.RefObject<HTMLElem
     let currentMouseX = width / 2;
     let currentMouseY = height + 200;
 
+    const observer = new IntersectionObserver((entries) => {
+      isVisibleRef.current = entries[0].isIntersecting;
+      if (isVisibleRef.current) {
+        animate();
+      } else {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }, { threshold: 0 });
+
+    observer.observe(container);
+
     const animate = () => {
+      if (!isVisibleRef.current) return;
+      
       timeRef.current += 0.03;
       
       // Clear with slight trailing effect for glow
@@ -110,15 +124,19 @@ const RibbonCanvas = ({ containerRef }: { containerRef: React.RefObject<HTMLElem
       ctx.lineJoin = 'round';
 
       strands.forEach((strand, index) => {
-        // Calculate a wavy target position around the cursor
-        const waveRadius = 30 + Math.sin(timeRef.current * 2 + strand.phase) * 15;
-        const targetX = currentMouseX + Math.cos(timeRef.current + strand.phase) * waveRadius;
-        const targetY = currentMouseY + Math.sin(timeRef.current * 1.5 + strand.phase) * waveRadius;
+        // Ribbons mix exactly at the cursor point (waveRadius is 0 at the head)
+        const targetX = currentMouseX;
+        const targetY = currentMouseY;
 
         // Current head of the strand eases towards the target
         const head = strand.history[0];
-        const nextX = head.x + (targetX - head.x) * strand.friction;
-        const nextY = head.y + (targetY - head.y) * strand.friction;
+        
+        // Add a slight sine wave wobble to the movement to keep them organic before they mix
+        const wobbleX = Math.sin(timeRef.current * 3 + strand.phase) * 5;
+        const wobbleY = Math.cos(timeRef.current * 2 + strand.phase) * 5;
+
+        const nextX = head.x + (targetX + wobbleX - head.x) * strand.friction;
+        const nextY = head.y + (targetY + wobbleY - head.y) * strand.friction;
 
         // Push new head, pop tail
         strand.history.unshift({ x: nextX, y: nextY });
@@ -174,6 +192,7 @@ const RibbonCanvas = ({ containerRef }: { containerRef: React.RefObject<HTMLElem
       window.removeEventListener('resize', resize);
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
+      observer.disconnect();
       cancelAnimationFrame(animationRef.current);
     };
   }, []);

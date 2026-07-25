@@ -44,6 +44,7 @@ const HeroCursorCanvas = ({ containerRef }: { containerRef: React.RefObject<HTML
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0, active: false });
   const particlesRef = useRef<{ x: number; y: number; baseX: number; baseY: number; vx: number; vy: number; size: number; opacity: number; hue: number }[]>([]);
   const animationRef = useRef<number>(0);
+  const isVisibleRef = useRef(true);
 
   const initParticles = useCallback((width: number, height: number) => {
     const particles: typeof particlesRef.current = [];
@@ -104,8 +105,18 @@ const HeroCursorCanvas = ({ containerRef }: { containerRef: React.RefObject<HTML
     const w = () => canvas.width / (Math.min(window.devicePixelRatio || 1, 2));
     const h = () => canvas.height / (Math.min(window.devicePixelRatio || 1, 2));
 
+    const observer = new IntersectionObserver((entries) => {
+      isVisibleRef.current = entries[0].isIntersecting;
+      if (isVisibleRef.current) {
+        animate();
+      } else {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }, { threshold: 0 });
+    observer.observe(container);
+
     const animate = () => {
-      if (!ctx || !canvas) return;
+      if (!ctx || !canvas || !isVisibleRef.current) return;
       const cw = w();
       const ch = h();
       ctx.clearRect(0, 0, cw, ch);
@@ -180,6 +191,7 @@ const HeroCursorCanvas = ({ containerRef }: { containerRef: React.RefObject<HTML
       window.removeEventListener('resize', resize);
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
+      observer.disconnect();
       cancelAnimationFrame(animationRef.current);
     };
   }, [containerRef, initParticles]);
@@ -195,6 +207,7 @@ const DownloadParticles = ({ containerRef }: { containerRef: React.RefObject<HTM
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0, active: false });
   const particlesRef = useRef<{ x: number; y: number; baseX: number; baseY: number; vx: number; vy: number; size: number; opacity: number }[]>([]);
   const animationRef = useRef<number>(0);
+  const isVisibleRef = useRef(true);
 
   const initParticles = useCallback((width: number, height: number) => {
     const particles: typeof particlesRef.current = [];
@@ -254,8 +267,18 @@ const DownloadParticles = ({ containerRef }: { containerRef: React.RefObject<HTM
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
 
+    const observer = new IntersectionObserver((entries) => {
+      isVisibleRef.current = entries[0].isIntersecting;
+      if (isVisibleRef.current) {
+        animate();
+      } else {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }, { threshold: 0 });
+    observer.observe(container);
+
     const animate = () => {
-      if (!ctx || !canvas) return;
+      if (!ctx || !canvas || !isVisibleRef.current) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       const mouse = mouseRef.current;
@@ -304,6 +327,7 @@ const DownloadParticles = ({ containerRef }: { containerRef: React.RefObject<HTM
       window.removeEventListener('resize', resize);
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
+      observer.disconnect();
       cancelAnimationFrame(animationRef.current);
     };
   }, [containerRef, initParticles]);
