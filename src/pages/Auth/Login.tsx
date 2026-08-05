@@ -36,7 +36,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-white dark:bg-[#030308] flex flex-col items-center justify-center p-4 transition-colors duration-300">
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export default function Login() {
         className="w-full max-w-[420px]"
       >
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-[#1D1D1F] tracking-tight mb-3">Welcome Back</h1>
+          <h1 className="text-4xl font-bold text-[#1D1D1F] dark:text-white tracking-tight mb-3">Welcome Back</h1>
           <p className="text-[#86868B] text-[17px]">Sign in to your Invenza ERP portal.</p>
         </div>
 
@@ -54,7 +54,7 @@ export default function Login() {
               type="email"
               placeholder="Email Address"
               required
-              className="w-full px-5 py-4 bg-[#F5F5F7] border border-transparent rounded-[16px] text-[17px] text-[#1D1D1F] placeholder:text-[#86868B] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+              className="w-full px-5 py-4 bg-[#F5F5F7] dark:bg-[#111115] border border-transparent dark:border-gray-800/50 rounded-[16px] text-[17px] text-[#1D1D1F] dark:text-white placeholder:text-[#86868B] dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -63,7 +63,7 @@ export default function Login() {
               type="password"
               placeholder="Password"
               required
-              className="w-full px-5 py-4 bg-[#F5F5F7] border border-transparent rounded-[16px] text-[17px] text-[#1D1D1F] placeholder:text-[#86868B] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+              className="w-full px-5 py-4 bg-[#F5F5F7] dark:bg-[#111115] border border-transparent dark:border-gray-800/50 rounded-[16px] text-[17px] text-[#1D1D1F] dark:text-white placeholder:text-[#86868B] dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

@@ -6,18 +6,21 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    background-color: #FFFFFF;
+    /* Lenis handles smooth scrolling — no CSS scroll-behavior needed */
   }
 
   body {
-    background-color: #FFFFFF;
-    color: #000000;
-    /* Outfit perfectly mimics the geometry of Google Sans */
+    @apply bg-white dark:bg-[#030308] text-[#1D1D1F] dark:text-white transition-colors duration-300;
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+  }
+
+  /* Global perspective container for 3D scroll effects */
+  main {
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
   }
 
   ::selection {

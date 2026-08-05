@@ -40,7 +40,7 @@ export default function VerifyEmail() {
   }, [token]);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-white dark:bg-[#030308] flex flex-col items-center justify-center p-4 transition-colors duration-300">
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -49,17 +49,17 @@ export default function VerifyEmail() {
         {status === 'loading' && (
           <div className="flex flex-col items-center justify-center space-y-4">
             <Loader2 className="w-12 h-12 text-[#0071E3] animate-spin" />
-            <h1 className="text-2xl font-bold text-[#1D1D1F]">Verifying...</h1>
-            <p className="text-[#86868B]">Please wait while we verify your email address.</p>
+            <h1 className="text-2xl font-bold text-[#1D1D1F] dark:text-white">Verifying...</h1>
+            <p className="text-[#86868B] dark:text-gray-400">Please wait while we verify your email address.</p>
           </div>
         )}
 
         {status === 'success' && (
           <div className="flex flex-col items-center justify-center space-y-4">
             <CheckCircle2 className="w-16 h-16 text-green-500" />
-            <h1 className="text-3xl font-bold text-[#1D1D1F]">Email Verified!</h1>
-            <p className="text-[#86868B]">{message}</p>
-            <p className="text-[#86868B] text-sm mt-2">Next, you'll need to set up your company to start your trial.</p>
+            <h1 className="text-3xl font-bold text-[#1D1D1F] dark:text-white">Email Verified!</h1>
+            <p className="text-[#86868B] dark:text-gray-400">{message}</p>
+            <p className="text-[#86868B] dark:text-gray-400 text-sm mt-2">Next, you'll need to set up your company to start your trial.</p>
             <button
               onClick={() => navigate('/setup-company')}
               className="w-full py-4 mt-6 bg-[#0071E3] text-white rounded-full text-[17px] font-semibold hover:bg-[#0077ED] transition-colors"
@@ -72,11 +72,11 @@ export default function VerifyEmail() {
         {status === 'error' && (
           <div className="flex flex-col items-center justify-center space-y-4">
             <XCircle className="w-16 h-16 text-red-500" />
-            <h1 className="text-3xl font-bold text-[#1D1D1F]">Verification Failed</h1>
-            <p className="text-[#86868B]">{message}</p>
+            <h1 className="text-3xl font-bold text-[#1D1D1F] dark:text-white">Verification Failed</h1>
+            <p className="text-[#86868B] dark:text-gray-400">{message}</p>
             <button
               onClick={() => navigate('/login')}
-              className="w-full py-4 mt-6 bg-[#1D1D1F] text-white rounded-full text-[17px] font-semibold hover:bg-black transition-colors"
+              className="w-full py-4 mt-6 bg-[#1D1D1F] dark:bg-white text-white dark:text-black rounded-full text-[17px] font-semibold hover:bg-black dark:hover:bg-gray-200 transition-colors"
             >
               Return to Login
             </button>

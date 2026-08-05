@@ -108,7 +108,8 @@ const RibbonCanvas = ({ containerRef }: { containerRef: React.RefObject<HTMLElem
       timeRef.current += 0.03;
       
       // Clear with slight trailing effect for glow
-      ctx.fillStyle = '#F8F9FA'; // Match background
+      const isDark = document.documentElement.classList.contains('dark');
+      ctx.fillStyle = isDark ? '#030308' : '#F8F9FA'; // Match background
       ctx.fillRect(0, 0, width, height);
 
       const mouse = mouseRef.current;
@@ -131,12 +132,8 @@ const RibbonCanvas = ({ containerRef }: { containerRef: React.RefObject<HTMLElem
         // Current head of the strand eases towards the target
         const head = strand.history[0];
         
-        // Add a slight sine wave wobble to the movement to keep them organic before they mix
-        const wobbleX = Math.sin(timeRef.current * 3 + strand.phase) * 5;
-        const wobbleY = Math.cos(timeRef.current * 2 + strand.phase) * 5;
-
-        const nextX = head.x + (targetX + wobbleX - head.x) * strand.friction;
-        const nextY = head.y + (targetY + wobbleY - head.y) * strand.friction;
+        const nextX = head.x + (targetX - head.x) * strand.friction;
+        const nextY = head.y + (targetY - head.y) * strand.friction;
 
         // Push new head, pop tail
         strand.history.unshift({ x: nextX, y: nextY });
@@ -247,11 +244,11 @@ const TiltCard = ({ testimonial, index }: { testimonial: typeof testimonials[0],
         className="h-full relative group"
       >
         <div 
-          className="relative h-full bg-white/80 backdrop-blur-md border border-gray-200/60 rounded-[32px] p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] overflow-hidden transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgb(0,113,227,0.08)] flex flex-col"
+          className="relative h-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200/60 dark:border-gray-800/50 rounded-[32px] p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] dark:shadow-none overflow-hidden transition-shadow duration-300 group-hover:shadow-[0_20px_40px_rgb(0,113,227,0.08)] dark:group-hover:shadow-[0_20px_40px_rgba(0,113,227,0.15)] flex flex-col"
           style={{ transform: "translateZ(20px)" }}
         >
           {/* Subtle hover gradient inside card */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 dark:from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
           <Quote className="w-10 h-10 text-blue-500/20 mb-6 relative z-10" style={{ transform: "translateZ(10px)" }} />
           
@@ -261,7 +258,7 @@ const TiltCard = ({ testimonial, index }: { testimonial: typeof testimonials[0],
             ))}
           </div>
 
-          <p className="text-[#1D1D1F] text-[16px] leading-relaxed font-normal mb-8 relative z-10 flex-grow" style={{ transform: "translateZ(15px)" }}>
+          <p className="text-[#1D1D1F] dark:text-gray-100 text-base leading-relaxed mb-6 font-medium z-10 flex-1 relative" style={{ transform: "translateZ(15px)" }}>
             "{testimonial.content}"
           </p>
 
@@ -270,8 +267,8 @@ const TiltCard = ({ testimonial, index }: { testimonial: typeof testimonials[0],
               {testimonial.name.charAt(0)}
             </div>
             <div>
-              <h4 className="text-[#1D1D1F] font-bold text-[15px]">{testimonial.name}</h4>
-              <p className="text-[#5F6368] text-[13px] font-medium">{testimonial.role}, {testimonial.company}</p>
+              <h4 className="text-[#1D1D1F] dark:text-white font-bold text-[15px]">{testimonial.name}</h4>
+              <p className="text-[#5F6368] dark:text-gray-400 text-[13px] font-medium">{testimonial.role}, {testimonial.company}</p>
             </div>
           </div>
         </div>
@@ -285,7 +282,7 @@ export default function Testimonials() {
 
   return (
     <section 
-      className="py-24 px-4 sm:px-8 relative overflow-hidden bg-[#F8F9FA] min-h-[750px] flex flex-col justify-center cursor-crosshair"
+      className="py-24 px-4 sm:px-8 relative overflow-hidden bg-[#F8F9FA] dark:bg-[#030308] min-h-[750px] flex flex-col justify-center"
       ref={containerRef}
     >
       <RibbonCanvas containerRef={containerRef} />
@@ -298,10 +295,10 @@ export default function Testimonials() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-[44px] md:text-[56px] font-normal tracking-[-0.03em] text-[#1D1D1F] mb-4 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-[#1D1D1F] dark:text-white mb-4 drop-shadow-sm">
               Loved by businesses.
             </h2>
-            <p className="text-[#5F6368] text-xl font-light max-w-2xl mx-auto">
+            <p className="text-[#86868B] dark:text-gray-400 max-w-2xl mx-auto text-lg">
               See what our customers have to say about their experience with Invenza ERP.
             </p>
           </motion.div>

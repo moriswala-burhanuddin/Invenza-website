@@ -52,20 +52,20 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-[#FFFFFF] dark:bg-[#030308] flex flex-col items-center justify-center p-4 transition-colors duration-300">
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="w-full max-w-[420px]"
       >
-        <button onClick={() => navigate('/login')} className="flex items-center gap-2 text-[#86868B] hover:text-[#1D1D1F] transition-colors mb-6">
+        <button onClick={() => navigate('/login')} className="flex items-center gap-2 text-[#86868B] dark:text-gray-400 hover:text-[#1D1D1F] dark:hover:text-white transition-colors mb-6">
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Login</span>
         </button>
 
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-[#1D1D1F] tracking-tight mb-3">Create New Password</h1>
+          <h1 className="text-4xl font-bold text-[#1D1D1F] dark:text-white tracking-tight mb-3">Create New Password</h1>
           <p className="text-[#86868B] text-[17px]">Choose a new password for your account.</p>
         </div>
 
@@ -81,7 +81,7 @@ export default function ResetPassword() {
                 type="password"
                 placeholder="New Password"
                 required
-                className="w-full px-5 py-4 bg-[#F5F5F7] border border-transparent rounded-[16px] text-[17px] text-[#1D1D1F] placeholder:text-[#86868B] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                className="w-full px-5 py-4 bg-[#F5F5F7] dark:bg-[#111115] border border-transparent dark:border-gray-800/50 rounded-[16px] text-[17px] text-[#1D1D1F] dark:text-white placeholder:text-[#86868B] dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -90,7 +90,7 @@ export default function ResetPassword() {
                 type="password"
                 placeholder="Confirm Password"
                 required
-                className="w-full px-5 py-4 bg-[#F5F5F7] border border-transparent rounded-[16px] text-[17px] text-[#1D1D1F] placeholder:text-[#86868B] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                className="w-full px-5 py-4 bg-[#F5F5F7] dark:bg-[#111115] border border-transparent dark:border-gray-800/50 rounded-[16px] text-[17px] text-[#1D1D1F] dark:text-white placeholder:text-[#86868B] dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />

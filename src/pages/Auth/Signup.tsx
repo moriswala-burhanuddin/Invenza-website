@@ -52,7 +52,7 @@ export default function Signup() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-white dark:bg-[#030308] flex flex-col items-center justify-center p-4 transition-colors duration-300">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -61,7 +61,7 @@ export default function Signup() {
           <div className="mx-auto w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6">
             <CheckCircle2 className="w-10 h-10 text-green-500" />
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-[#1D1D1F] mb-4">You're all set!</h2>
+          <h2 className="text-4xl font-bold tracking-tight text-[#1D1D1F] dark:text-white mb-4">You're all set!</h2>
           <p className="text-[#86868B] text-[17px] mb-10 leading-relaxed">
             Your account has been created successfully. We've sent a verification link to your email address. You will be able to set up your company and get your ERP credentials after verifying.
           </p>
@@ -77,7 +77,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-white dark:bg-[#030308] flex flex-col items-center justify-center p-4 transition-colors duration-300">
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function Signup() {
         className="w-full max-w-[420px]"
       >
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-[#1D1D1F] tracking-tight mb-3">Create Account</h1>
+          <h1 className="text-4xl font-bold text-[#1D1D1F] dark:text-white tracking-tight mb-3">Create Account</h1>
           <p className="text-[#86868B] text-[17px]">Start your 7-day free trial of Invenza ERP.</p>
         </div>
 
@@ -96,7 +96,7 @@ export default function Signup() {
               name="username"
               placeholder="Full Name"
               required
-              className="w-full px-5 py-4 bg-[#F5F5F7] border border-transparent rounded-[16px] text-[17px] text-[#1D1D1F] placeholder:text-[#86868B] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+              className="w-full px-5 py-4 bg-[#F5F5F7] dark:bg-[#111115] border border-transparent dark:border-gray-800/50 rounded-[16px] text-[17px] text-[#1D1D1F] dark:text-white placeholder:text-[#86868B] dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
               value={formData.username}
               onChange={handleChange}
             />
@@ -106,7 +106,7 @@ export default function Signup() {
               name="email"
               placeholder="Email Address"
               required
-              className="w-full px-5 py-4 bg-[#F5F5F7] border border-transparent rounded-[16px] text-[17px] text-[#1D1D1F] placeholder:text-[#86868B] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+              className="w-full px-5 py-4 bg-[#F5F5F7] dark:bg-[#111115] border border-transparent dark:border-gray-800/50 rounded-[16px] text-[17px] text-[#1D1D1F] dark:text-white placeholder:text-[#86868B] dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
               value={formData.email}
               onChange={handleChange}
             />
@@ -117,7 +117,7 @@ export default function Signup() {
               placeholder="Create Password"
               required
               minLength={8}
-              className="w-full px-5 py-4 bg-[#F5F5F7] border border-transparent rounded-[16px] text-[17px] text-[#1D1D1F] placeholder:text-[#86868B] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+              className="w-full px-5 py-4 bg-[#F5F5F7] dark:bg-[#111115] border border-transparent dark:border-gray-800/50 rounded-[16px] text-[17px] text-[#1D1D1F] dark:text-white placeholder:text-[#86868B] dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
               value={formData.password}
               onChange={handleChange}
             />

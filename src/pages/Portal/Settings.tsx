@@ -119,7 +119,7 @@ export default function Settings() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] pt-32 pb-20">
+    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#030308] pt-32 pb-20 transition-colors duration-300">
       <div className="max-w-3xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -127,11 +127,11 @@ export default function Settings() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="mb-10">
-            <h1 className="text-4xl font-bold text-[#1D1D1F] tracking-tight mb-2">Company Settings</h1>
-            <p className="text-[#86868B] text-[17px]">Update your business details and contact information.</p>
+            <h1 className="text-4xl font-bold text-[#1D1D1F] dark:text-white tracking-tight mb-2">Company Settings</h1>
+            <p className="text-[#86868B] dark:text-gray-400 text-[17px]">Update your business details and contact information.</p>
           </div>
 
-          <div className="bg-white p-8 md:p-10 rounded-[32px] shadow-sm border border-gray-100">
+          <div className="bg-white dark:bg-[#111115] p-8 md:p-10 rounded-[32px] shadow-sm dark:shadow-none border border-gray-100 dark:border-gray-800/50">
             {error && (
               <div className="bg-red-50 text-red-600 p-4 rounded-xl mb-6 text-sm font-medium border border-red-100">
                 {error}
@@ -149,113 +149,113 @@ export default function Settings() {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">Company Name</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">Company Name</label>
                   <input
                     type="text"
                     name="name"
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">Legal Entity Name</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">Legal Entity Name</label>
                   <input
                     type="text"
                     name="legal_name"
                     value={formData.legal_name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">Tax ID / VAT (e.g. GST/PAN)</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">Tax ID / VAT (e.g. GST/PAN)</label>
                   <input
                     type="text"
                     name="tax_id"
                     value={formData.tax_id}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">Phone Number</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">Phone Number</label>
                   <input
                     type="text"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
               </div>
 
-              <hr className="border-gray-100" />
+              <hr className="border-gray-100 dark:border-gray-800/50" />
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">Address</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">Address</label>
                   <input
                     type="text"
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">City</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">City</label>
                   <input
                     type="text"
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">State / Province</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">State / Province</label>
                   <input
                     type="text"
                     name="state"
                     value={formData.state}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">ZIP / Pincode</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">ZIP / Pincode</label>
                   <input
                     type="text"
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">Website</label>
+                  <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">Website</label>
                   <input
                     type="url"
                     name="website"
                     placeholder="https://"
                     value={formData.website}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
               </div>
               
-              <hr className="border-gray-100" />
+              <hr className="border-gray-100 dark:border-gray-800/50" />
               
               <div>
-                <label className="block text-sm font-medium text-[#1D1D1F] mb-1.5">Base Currency</label>
+                <label className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">Base Currency</label>
                 <select
                   name="base_currency"
                   value={formData.base_currency}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-transparent rounded-xl text-[15px] text-[#1D1D1F] focus:bg-white focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none appearance-none"
+                  className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none appearance-none"
                 >
                   <option value="UGX">UGX (Ugandan Shilling)</option>
                   <option value="USD">USD (US Dollar)</option>
@@ -263,7 +263,7 @@ export default function Settings() {
                   <option value="GBP">GBP (British Pound)</option>
                   <option value="EUR">EUR (Euro)</option>
                 </select>
-                <p className="mt-2 text-xs text-[#86868B]">Default display currency for your ERP dashboard.</p>
+                <p className="mt-2 text-xs text-[#86868B] dark:text-gray-400">Default display currency for your ERP dashboard.</p>
               </div>
 
               <div className="flex justify-end pt-4">

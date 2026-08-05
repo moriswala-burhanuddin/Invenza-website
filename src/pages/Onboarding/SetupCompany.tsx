@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { Loader2, CheckCircle2, Copy, Info } from 'lucide-react';
+import { Loader2, CheckCircle2, Info } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
 
@@ -11,8 +11,6 @@ export default function SetupCompany() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [erpPassword, setErpPassword] = useState('');
-  const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
 
   const handleSetup = async (e: React.FormEvent) => {
@@ -28,13 +26,11 @@ export default function SetupCompany() {
     }
 
     try {
-      const res = await axios.post(
+      await axios.post(
         `${API_URL}/setup-company/`,
         { company_name: companyName },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      
-      setErpPassword(res.data.temp_erp_pass);
       setSuccess(true);
     } catch (err: any) {
       if (err.response?.data) {
@@ -55,11 +51,7 @@ export default function SetupCompany() {
     }
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(erpPassword);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+
 
   if (success) {
     return (
@@ -74,27 +66,8 @@ export default function SetupCompany() {
           </div>
           <h2 className="text-4xl font-bold tracking-tight text-[#1D1D1F] mb-4">Setup Complete!</h2>
           <p className="text-[#86868B] text-[17px] mb-8 leading-relaxed">
-            Your 7-day trial has started. Below is your <strong>Admin Password</strong> for the Desktop ERP app.
+            Your 7-day trial has started. You can now log into the Desktop ERP app using your account email and password.
           </p>
-
-          <div className="bg-[#F5F5F7] p-6 rounded-2xl mb-8 border border-red-100 relative">
-            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
-              IMPORTANT: Save this password!
-            </div>
-            <p className="text-sm text-[#86868B] mb-3">
-              This password is securely hashed in our database. We cannot recover it if you lose it. It will not be shown again.
-            </p>
-            <div className="flex items-center justify-between bg-white border border-[#E5E5EA] p-4 rounded-xl">
-              <span className="font-mono text-lg font-medium text-[#1D1D1F]">{erpPassword}</span>
-              <button 
-                onClick={copyToClipboard}
-                className="text-[#0071E3] hover:text-[#0077ED] transition-colors flex items-center gap-2 font-medium"
-              >
-                {copied ? <CheckCircle2 className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-                {copied ? 'Copied!' : 'Copy'}
-              </button>
-            </div>
-          </div>
 
           <button
             onClick={() => navigate('/portal')}
