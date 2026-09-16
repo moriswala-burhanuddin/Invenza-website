@@ -1210,12 +1210,36 @@ const dlRotateX = useTransform(dlProgress, [0.1, 0.5], [4, 0]);
             />
             
             <div className="flex flex-wrap gap-3 mt-6">
-              <a href="#" className="bg-white dark:bg-[#09090B] text-black px-6 py-3 rounded-full text-[15px] font-medium hover:bg-gray-100 transition-colors">
-                Download for x64
-              </a>
-              <a href="#" className="bg-[#2D2D2D] border border-white/15 text-white px-6 py-3 rounded-full text-[15px] font-medium hover:bg-[#3D3D3D] transition-colors">
-                Download for ARM64
-              </a>
+              <button 
+                onClick={async (e) => {
+                  e.preventDefault();
+                  try {
+                    const res = await fetch('https://api.github.com/repos/moriswala-burhanuddin/Invenza-Electron-app/releases/latest');
+                    const data = await res.json();
+                    const asset = data.assets.find((a: any) => a.name.endsWith('.exe'));
+                    if (asset) window.location.href = asset.browser_download_url;
+                    else alert('No Windows build found in the latest release!');
+                  } catch (err) { alert('Could not fetch the latest download link.'); }
+                }}
+                className="bg-white dark:bg-[#09090B] text-black px-6 py-3 rounded-full text-[15px] font-medium hover:bg-gray-100 transition-colors"
+              >
+                Download for Windows
+              </button>
+              <button 
+                onClick={async (e) => {
+                  e.preventDefault();
+                  try {
+                    const res = await fetch('https://api.github.com/repos/moriswala-burhanuddin/Invenza-Electron-app/releases/latest');
+                    const data = await res.json();
+                    const asset = data.assets.find((a: any) => a.name.endsWith('.dmg') || a.name.endsWith('.zip'));
+                    if (asset) window.location.href = asset.browser_download_url;
+                    else alert('No Mac build found in the latest release!');
+                  } catch (err) { alert('Could not fetch the latest download link.'); }
+                }}
+                className="bg-[#2D2D2D] border border-white/15 text-white px-6 py-3 rounded-full text-[15px] font-medium hover:bg-[#3D3D3D] transition-colors"
+              >
+                Download for Mac
+              </button>
             </div>
           </div>
         </motion.div>
