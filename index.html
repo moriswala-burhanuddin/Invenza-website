@@ -28,6 +28,22 @@
     <!-- Razorpay Checkout -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
+    <!-- Prevent Dark Mode Flash -->
+    <script>
+      (function() {
+        try {
+          var localTheme = localStorage.getItem('theme');
+          var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (localTheme === 'dark' || (!localTheme && systemDark)) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.style.backgroundColor = '#030308';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.style.backgroundColor = '#ffffff';
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

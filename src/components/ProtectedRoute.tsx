@@ -28,15 +28,17 @@ export default function ProtectedRoute() {
         setIsAuthenticated(true);
         setHasCompany(true);
       } catch (err: any) {
-        if (err.response?.status === 401) {
-          setIsAuthenticated(false);
-        } else if (err.response?.status === 404) {
+        if (err.response?.status === 404) {
           // 404 means the user exists and is logged in, but has no company
           setIsAuthenticated(true);
           setHasCompany(false);
         } else {
-          // Assume authenticated but error loading
-          setIsAuthenticated(true);
+          // 401, 403, or Network Error
+          setIsAuthenticated(false);
+          if (err.response?.status === 401) {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+          }
         }
       } finally {
         setLoading(false);

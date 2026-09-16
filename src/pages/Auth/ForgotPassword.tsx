@@ -17,7 +17,8 @@ export default function ForgotPassword() {
     setError('');
     setMessage('');
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/request-password-reset/', { email });
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await axios.post(`${API_URL}/request-password-reset/`, { email });
       setMessage(res.data.message || 'Check your email for a reset link.');
     } catch (err: any) {
       setError(err.response?.data?.error || 'Something went wrong. Please try again.');

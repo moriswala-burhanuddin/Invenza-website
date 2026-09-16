@@ -31,14 +31,18 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 dark:bg-[#030308]/80 backdrop-blur-md border-b border-gray-100 dark:border-white/10 py-3' : 'bg-transparent py-5'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 dark:bg-[#030308]/80 backdrop-blur-md border-b border-gray-200/50 dark:border-white/5 py-3' : 'bg-transparent py-5 border-b border-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         
-        <Link to="/" className="flex items-center transition-opacity hover:opacity-70">
-          <img src={invenzaLogo} alt="Invenza" className={`h-7 w-auto object-contain transition-all ${theme === 'dark' ? 'bg-white/95 px-2.5 py-1 rounded-lg' : ''}`} />
+        <Link to="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-80">
+          <img src={invenzaLogo} alt="Invenza Logo" className={`h-8 w-auto object-contain transition-all ${theme === 'dark' ? 'bg-white/95 px-2 py-1 rounded-lg' : ''}`} />
+          <span className="font-semibold text-xl tracking-tight text-[#1D1D1F] dark:text-white">Invenza</span>
         </Link>
 
         <div className="flex items-center gap-6">
+          <Link to="/pricing" className="text-sm font-medium text-[#1D1D1F] dark:text-white hover:text-[#0071E3] transition-colors hidden md:block">
+            Pricing
+          </Link>
           {isLoggedIn ? (
             <>
               <Link to="/dashboard" className="flex items-center gap-2 text-sm font-medium text-[#1D1D1F] dark:text-white hover:text-[#0071E3] dark:hover:text-[#0071E3] transition-colors">

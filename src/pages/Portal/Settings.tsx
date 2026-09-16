@@ -119,8 +119,8 @@ export default function Settings() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#030308] pt-32 pb-20 transition-colors duration-300">
-      <div className="max-w-3xl mx-auto px-6">
+    <div className="w-full">
+      <div className="w-full">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export default function Settings() {
             <p className="text-[#86868B] dark:text-gray-400 text-[17px]">Update your business details and contact information.</p>
           </div>
 
-          <div className="bg-white dark:bg-[#111115] p-8 md:p-10 rounded-[32px] shadow-sm dark:shadow-none border border-gray-100 dark:border-gray-800/50">
+          <div className="bg-white dark:bg-[#09090B] p-8 md:p-10 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm transition-all hover:shadow-md">
             {error && (
               <div className="bg-red-50 text-red-600 p-4 rounded-xl mb-6 text-sm font-medium border border-red-100">
                 {error}
@@ -156,7 +156,7 @@ export default function Settings() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
@@ -166,7 +166,7 @@ export default function Settings() {
                     name="legal_name"
                     value={formData.legal_name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
@@ -176,7 +176,7 @@ export default function Settings() {
                     name="tax_id"
                     value={formData.tax_id}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
@@ -186,7 +186,7 @@ export default function Settings() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
               </div>
@@ -201,7 +201,7 @@ export default function Settings() {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
@@ -211,7 +211,7 @@ export default function Settings() {
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
@@ -221,7 +221,7 @@ export default function Settings() {
                     name="state"
                     value={formData.state}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
@@ -231,7 +231,7 @@ export default function Settings() {
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
                 <div>
@@ -242,7 +242,7 @@ export default function Settings() {
                     placeholder="https://"
                     value={formData.website}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F7] dark:bg-white/5 border border-transparent dark:border-gray-800/50 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
+                    className="w-full px-4 py-3 bg-gray-50/80 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800/60 rounded-xl text-[15px] text-[#1D1D1F] dark:text-white focus:bg-white dark:focus:bg-[#1a1a20] focus:border-[#0071E3] focus:ring-4 focus:ring-[#0071E3]/10 transition-all outline-none"
                   />
                 </div>
               </div>

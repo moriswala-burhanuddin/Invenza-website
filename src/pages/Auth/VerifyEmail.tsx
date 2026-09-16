@@ -20,7 +20,8 @@ export default function VerifyEmail() {
 
     const verify = async () => {
       try {
-        const res = await axios.post('http://127.0.0.1:8000/api/verify-email/', { token });
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
+        const res = await axios.post(`${API_URL}/verify-email/`, { token });
         
         // Save tokens to log the user in automatically
         if (res.data.access && res.data.refresh) {

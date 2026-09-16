@@ -15,19 +15,24 @@ import VerifyEmail from './pages/Auth/VerifyEmail';
 import Dashboard from './pages/Portal/Dashboard';
 import Pricing from './pages/Portal/Pricing';
 import BillingHistory from './pages/Portal/BillingHistory';
+import CheckoutSuccess from './pages/Portal/CheckoutSuccess';
 import Settings from './pages/Portal/Settings';
 import Home from './pages/Home';
 import SetupCompany from './pages/Onboarding/SetupCompany';
 import ProtectedRoute from './components/ProtectedRoute';
 
+import PortalLayout from './components/layout/PortalLayout';
+
 const Layout = () => (
-  <div className="flex flex-col min-h-screen bg-white dark:bg-[#030308] text-[#1D1D1F] dark:text-white transition-colors duration-300">
-    <Navbar />
-    <main className="flex-1">
-      <Outlet />
-    </main>
-    <Footer />
-  </div>
+  <ReactLenis root options={{ lerp: 0.12, duration: 1.5, smoothWheel: true, wheelMultiplier: 1.2 }}>
+    <div className="flex flex-col min-h-screen bg-white dark:bg-[#030308] text-[#1D1D1F] dark:text-white transition-colors duration-300">
+      <Navbar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  </ReactLenis>
 );
 
 // Home component is imported from pages/Home.tsx
@@ -43,34 +48,40 @@ export default function App() {
 
       {/* Main App Content - Hidden from screen readers while loading */}
       <div aria-hidden={isAppLoading} style={{ opacity: isAppLoading ? 0 : 1, transition: 'opacity 0.8s ease' }}>
-        <ReactLenis root options={{ lerp: 0.12, duration: 1.5, smoothWheel: true, wheelMultiplier: 1.2 }}>
-          <Router>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route path="/" element={<Home />} />
+        <Router>
+          <Routes>
+            {/* Marketing & Auth Routes */}
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
 
-                {/* Auth Routes */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/verify-email" element={<VerifyEmail />} />
+              {/* Auth Routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
 
-                {/* Protected Routes */}
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/setup-company" element={<SetupCompany />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/pricing" element={<Pricing />} />
-                  <Route path="/billing-history" element={<BillingHistory />} />
-                  <Route path="/settings" element={<Settings />} />
-                </Route>
+              {/* Public Routes */}
+              <Route path="/pricing" element={<Pricing />} />
+            </Route>
+
+            {/* Portal Routes with Dedicated Layout */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/setup-company" element={<SetupCompany />} />
+              
+              {/* Wrap actual portal pages in PortalLayout */}
+              <Route element={<PortalLayout><Outlet /></PortalLayout>}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/billing-history" element={<BillingHistory />} />
+                <Route path="/checkout-success" element={<CheckoutSuccess />} />
+                <Route path="/settings" element={<Settings />} />
               </Route>
+            </Route>
 
-              {/* Catch all */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Router>
-        </ReactLenis>
+            {/* Catch all */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
       </div>
     </ThemeProvider>
   );

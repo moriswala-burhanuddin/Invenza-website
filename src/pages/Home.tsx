@@ -835,134 +835,112 @@ export default function Home() {
 
   // Download CTA — billboard tilt
   const { scrollYProgress: dlProgress } = useScroll({ target: downloadCtaRef, offset: ["start end", "end start"] });
-  const dlRotateX = useTransform(dlProgress, [0.1, 0.5], [4, 0]);
+const dlRotateX = useTransform(dlProgress, [0.1, 0.5], [4, 0]);
   const dlScale = useTransform(dlProgress, [0.1, 0.5], [0.95, 1]);
   const smoothDlRotateX = useSpring(dlRotateX, { stiffness: 80, damping: 20 });
   
   return (
     <div className="bg-[#F8F9FA] dark:bg-[#030308] min-h-screen font-sans selection:bg-[#0071E3] selection:text-white">
       
-      {/* ===== 1. HERO SECTION ===== */}
-      <section ref={heroRef} className="relative min-h-screen pt-20 flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-[#09090B]">
-        <HeroCursorCanvas containerRef={heroRef} />
+      {/* ===== 1. HERO SECTION (Minimalist SaaS Style) ===== */}
+      <section ref={heroRef} className="relative min-h-[90vh] pt-32 pb-20 flex flex-col items-center justify-center overflow-hidden bg-[#FAFAFA] dark:bg-[#000000] transition-colors duration-500 border-b border-gray-200 dark:border-white/10">
         
-        <motion.div style={{ y: heroParallaxY }} className="w-full max-w-[1600px] mx-auto text-center z-10 flex flex-col items-center justify-center">
-          {/* Logo badge */}
+        {/* Subtle Grid Background */}
+        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTUwLCAxNTAsIDE1MCwgMC4yKSIvPjwvc3ZnPg==')] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_20%,transparent_100%)] opacity-50 dark:opacity-30"></div>
+          
+          {/* Very subtle top gradient for depth, not glowing orbs */}
+          <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-gray-200/50 dark:from-white/[0.03] to-transparent"></div>
+        </div>
+        
+        <motion.div style={{ y: heroParallaxY }} className="w-full max-w-5xl mx-auto px-6 text-center z-10 flex flex-col items-center justify-center relative">
+          
+          {/* Badge */}
           <motion.div 
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#09090B] text-[#1D1D1F] dark:text-white text-sm font-medium mb-10 shadow-sm"
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-[#111] border border-gray-200 dark:border-white/10 mb-8 shadow-sm"
           >
-            <InvenzaLogo size={18} />
-            Invenza ERP
+            <span className="flex h-1.5 w-1.5 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#000] dark:bg-[#fff] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#000] dark:bg-[#fff]"></span>
+            </span>
+            <span className="text-xs font-semibold text-gray-900 dark:text-[#EDEDED] uppercase tracking-wider">Invenza 2.0 is Live</span>
           </motion.div>
 
-          {/* Edge-to-Edge Corner/Overlapping Typography */}
-          <div className="w-full relative h-[65vh] max-w-[1400px] mx-auto mt-4 mb-16 pointer-events-none select-none">
-            {/* Outline text overlapping in background */}
-            <div className="absolute top-[10%] left-[-5%] text-left z-0 opacity-10 dark:opacity-20 pointer-events-none overflow-hidden">
-              <span className="text-[28vw] font-extrabold tracking-[-0.06em] text-transparent leading-[0.8] block" style={{ WebkitTextStroke: '3px #888' }}>
-                INVENZA
-              </span>
-            </div>
+          {/* Headline */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-tight text-gray-900 dark:text-white leading-[1.05] mb-6 max-w-4xl"
+          >
+            Powering retail at <br className="hidden sm:block" />
+            <span className="text-gray-400 dark:text-gray-500">
+              unprecedented speed.
+            </span>
+          </motion.h1>
 
-            {/* Top Left */}
-            <div className="absolute top-[5%] left-0 text-left pl-6 md:pl-10 z-10">
-              <span className="text-[14vw] md:text-[11vw] font-extrabold tracking-[-0.06em] text-[#1D1D1F] dark:text-white leading-[0.75] block">
-                THE
-              </span>
-              <span className="text-[14vw] md:text-[11vw] font-extrabold tracking-[-0.06em] text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-gray-200 dark:from-gray-600 dark:to-gray-800 leading-[0.75] block -mt-1 md:-mt-3">
-                SMARTEST
-              </span>
-            </div>
-
-            {/* Center Right / Typing Overlapping */}
-            <div className="absolute top-[38%] md:top-[32%] right-0 pr-6 md:pr-10 text-right z-20">
-              <span className="text-[18vw] md:text-[15vw] font-extrabold tracking-[-0.06em] text-[#0071E3] leading-[0.8] flex items-center justify-end drop-shadow-2xl">
-                {typedText}
-                <motion.span 
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ repeat: Infinity, duration: 0.7, ease: "linear" }}
-                  className="inline-block w-[1.5vw] h-[13vw] md:h-[11vw] bg-[#0071E3] ml-2 align-middle"
-                />
-              </span>
-            </div>
-
-            {/* Bottom Center / Left */}
-            <div className="absolute bottom-[5%] left-[5%] md:left-[15%] text-left z-30">
-              <span className="text-[12vw] md:text-[9vw] font-extrabold tracking-[-0.05em] text-[#1D1D1F] dark:text-white leading-[0.8] block">
-                ERP PLATFORM.
-              </span>
-            </div>
-          </div>
+          {/* Subheadline */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[18px] md:text-[20px] text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-2xl mb-10"
+          >
+            A perfectly engineered, offline-first inventory and point-of-sale system. Built for speed, extreme reliability, and uncompromising security.
+          </motion.p>
 
           {/* CTA buttons */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 z-40 relative"
+            transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 z-40 relative w-full sm:w-auto"
           >
-            <Link to="/signup" className="bg-[#1D1D1F] text-white px-6 py-3 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:shadow-lg flex items-center justify-center gap-2">
-              <Terminal className="w-4 h-4" /> Download Desktop App
+            <Link to="/signup" className="w-full sm:w-auto bg-gray-900 dark:bg-white text-white dark:text-black px-6 py-3 rounded-lg text-[15px] font-semibold hover:bg-black dark:hover:bg-gray-100 transition-colors flex items-center justify-center shadow-md">
+              Start Free Trial
             </Link>
-            <Link to="/features" className="bg-white dark:bg-[#09090B] border border-gray-300 text-[#1D1D1F] dark:text-white px-6 py-3 rounded-full text-[15px] font-medium hover:bg-gray-50 dark:bg-gray-900 transition-colors flex items-center justify-center">
-              Explore use cases
+            <Link to="/pricing" className="w-full sm:w-auto bg-white dark:bg-[#111] border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white px-6 py-3 rounded-lg text-[15px] font-semibold hover:bg-gray-50 dark:hover:bg-[#222] transition-colors flex items-center justify-center shadow-sm">
+              View Documentation
             </Link>
           </motion.div>
           
-          {/* Trust Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.2, duration: 0.8 }}
-            className="mt-16 w-full max-w-4xl mx-auto"
-          >
-            <div className="flex flex-col items-center mb-6">
-              <div className="flex gap-1 mb-2">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-5 h-5 fill-[#0071E3] text-[#0071E3]" />
-                ))}
-              </div>
-              <p className="text-[#86868B] font-medium text-[15px]">Trusted by Businesses</p>
+        </motion.div>
+        
+        {/* Trust Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-20 w-full max-w-4xl mx-auto z-10 relative px-4"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6">
+            <div className="flex flex-col items-center text-center">
+              <Server className="w-5 h-5 text-gray-400 dark:text-gray-500 mb-2" />
+              <h4 className="text-gray-900 dark:text-white font-semibold text-sm">99.9% Uptime</h4>
+              <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Guaranteed reliability</p>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-              <div className="bg-white/60 dark:bg-white/5 backdrop-blur-md border border-gray-100 dark:border-gray-800/50 rounded-[20px] p-5 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-                <div className="bg-[#0071E3]/10 p-3 rounded-full mb-3 text-[#0071E3]">
-                  <Server className="w-6 h-6" />
-                </div>
-                <h4 className="text-[#1D1D1F] dark:text-white font-semibold text-sm">99.9% Uptime</h4>
-                <p className="text-[#86868B] text-xs mt-1">Guaranteed reliability</p>
-              </div>
-              
-              <div className="bg-white/60 dark:bg-white/5 backdrop-blur-md border border-gray-100 dark:border-gray-800/50 rounded-[20px] p-5 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-                <div className="bg-[#0071E3]/10 p-3 rounded-full mb-3 text-[#0071E3]">
-                  <LockIcon className="w-6 h-6" />
-                </div>
-                <h4 className="text-[#1D1D1F] dark:text-white font-semibold text-sm">Secure Auth</h4>
-                <p className="text-[#86868B] text-xs mt-1">Enterprise-grade security</p>
-              </div>
-              
-              <div className="bg-white/60 dark:bg-white/5 backdrop-blur-md border border-gray-100 dark:border-gray-800/50 rounded-[20px] p-5 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-                <div className="bg-[#0071E3]/10 p-3 rounded-full mb-3 text-[#0071E3]">
-                  <Shield className="w-6 h-6" />
-                </div>
-                <h4 className="text-[#1D1D1F] dark:text-white font-semibold text-sm">Encrypted Data</h4>
-                <p className="text-[#86868B] text-xs mt-1">End-to-end protection</p>
-              </div>
-              
-              <div className="bg-white/60 dark:bg-white/5 backdrop-blur-md border border-gray-100 dark:border-gray-800/50 rounded-[20px] p-5 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-                <div className="bg-[#0071E3]/10 p-3 rounded-full mb-3 text-[#0071E3]">
-                  <Monitor className="w-6 h-6" />
-                </div>
-                <h4 className="text-[#1D1D1F] dark:text-white font-semibold text-sm">Desktop ERP</h4>
-                <p className="text-[#86868B] text-xs mt-1">Windows & macOS</p>
-              </div>
+            <div className="flex flex-col items-center text-center">
+              <LockIcon className="w-5 h-5 text-gray-400 dark:text-gray-500 mb-2" />
+              <h4 className="text-gray-900 dark:text-white font-semibold text-sm">Secure Auth</h4>
+              <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Enterprise-grade security</p>
             </div>
-          </motion.div>
-          
+            
+            <div className="flex flex-col items-center text-center">
+              <Shield className="w-5 h-5 text-gray-400 dark:text-gray-500 mb-2" />
+              <h4 className="text-gray-900 dark:text-white font-semibold text-sm">Encrypted Data</h4>
+              <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">End-to-end protection</p>
+            </div>
+            
+            <div className="flex flex-col items-center text-center">
+              <Monitor className="w-5 h-5 text-gray-400 dark:text-gray-500 mb-2" />
+              <h4 className="text-gray-900 dark:text-white font-semibold text-sm">Native Apps</h4>
+              <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">Windows & macOS</p>
+            </div>
+          </div>
         </motion.div>
       </section>
 

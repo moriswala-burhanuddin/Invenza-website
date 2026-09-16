@@ -35,7 +35,8 @@ export default function ResetPassword() {
     setError('');
     setMessage('');
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/reset-password/', { 
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await axios.post(`${API_URL}/reset-password/`, { 
         uid, 
         token, 
         password 
