@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Check, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../../lib/api';
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
 
 interface PlanData {
   id: number;
@@ -47,8 +50,9 @@ export default function Pricing() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // We always want to fetch plans. If creds fail with 401, that's fine (user is logged out)
-    api.get('/billing/plans/')
+    // We always want to fetch plans using raw axios. 
+    // If we use 'api', it attaches the token. If the token is expired, DRF returns 401 even though the endpoint is public.
+    axios.get(`${API_URL}/billing/plans/`)
       .then(plansRes => {
         setPlans(plansRes.data);
         return Promise.all([

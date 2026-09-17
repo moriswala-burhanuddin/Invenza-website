@@ -19,6 +19,7 @@ import CheckoutSuccess from './pages/Portal/CheckoutSuccess';
 import Settings from './pages/Portal/Settings';
 import Home from './pages/Home';
 import SetupCompany from './pages/Onboarding/SetupCompany';
+import TermsPrivacy from './pages/TermsPrivacy';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import PortalLayout from './components/layout/PortalLayout';
@@ -63,6 +64,7 @@ export default function App() {
 
               {/* Public Routes */}
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/terms" element={<TermsPrivacy />} />
             </Route>
 
             {/* Portal Routes with Dedicated Layout */}

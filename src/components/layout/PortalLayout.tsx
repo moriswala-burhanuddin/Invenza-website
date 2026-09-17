@@ -12,6 +12,7 @@ import {
   X
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import invenzaLogo from '../../assets/invenza-bg.png';
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -56,7 +57,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       
       <div className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-white/10 shrink-0">
         <Link to="/" className="flex items-center gap-2">
-          <Monitor className="w-5 h-5 text-gray-900 dark:text-white" />
+          <img src={invenzaLogo} alt="Invenza Logo" className={`h-6 w-auto object-contain transition-all ${isDark ? 'bg-white/95 px-1 py-0.5 rounded' : ''}`} />
           <span className="font-semibold text-[15px] tracking-tight text-gray-900 dark:text-white">
             Invenza
           </span>

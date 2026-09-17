@@ -49,8 +49,8 @@ export default function Footer() {
           <div className="flex flex-wrap gap-5 text-[13px] text-[#5F6368]">
             <a href="#" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">About Invenza</a>
             <a href="#" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Invenza Products</a>
-            <a href="#" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Terms</a>
+            <Link to="/terms" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Terms</Link>
           </div>
         </div>
 

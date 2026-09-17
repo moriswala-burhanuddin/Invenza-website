@@ -4,6 +4,7 @@ import { Play, Sparkles, Code, Terminal, Copy, Upload, Command, CornerDownLeft, 
 import { Link } from 'react-router-dom';
 import Testimonials from '../components/sections/Testimonials';
 import invenzaLogo from '../assets/invenza-bg.png';
+import PromoVideo from '../assets/VIDEO/InvenzaPromo.mp4';
 
 // ---------------------------------------------------------
 // Invenza Logo SVG Component (used everywhere)
@@ -950,46 +951,14 @@ const dlRotateX = useTransform(dlProgress, [0.1, 0.5], [4, 0]);
           style={{ y: videoY, scale: videoScale, rotateX: videoRotateX, transformOrigin: 'center bottom' }}
           className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#1D1D1F] rounded-[24px] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.3)] relative group cursor-pointer"
         >
-          {/* Play Button */}
-          <div className="absolute inset-0 flex items-center justify-center z-10">
-            <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-6 py-3 rounded-full shadow-lg group-hover:scale-105 transition-transform">
-              <Play className="w-4 h-4 text-black fill-black" />
-              <span className="text-black font-medium text-[15px]">Play intro</span>
-            </div>
-          </div>
-          
-          {/* Faux IDE UI */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] to-[#16213e]">
-            <div className="absolute top-4 left-5 flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-              <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-              <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-            </div>
-            <div className="absolute top-12 left-0 right-0 bottom-0 flex">
-              {/* Sidebar */}
-              <div className="w-56 border-r border-white/10 p-4 hidden md:block">
-                <div className="space-y-3 mt-2">
-                  <div className="h-3 bg-white/10 rounded w-3/4" />
-                  <div className="h-3 bg-white/5 rounded w-full" />
-                  <div className="h-3 bg-white/5 rounded w-5/6" />
-                  <div className="h-3 bg-white/8 rounded w-2/3" />
-                </div>
-              </div>
-              {/* Editor */}
-              <div className="flex-1 p-6">
-                <div className="flex gap-3 border-b border-white/10 pb-3 mb-4">
-                  <div className="h-3 bg-white/15 rounded w-20" />
-                  <div className="h-3 bg-white/8 rounded w-16" />
-                </div>
-                <div className="space-y-2.5 font-mono text-xs text-white/60">
-                  <div className="h-3 bg-white/5 rounded w-4/5" />
-                  <div className="h-3 bg-white/8 rounded w-3/5" />
-                  <div className="h-3 bg-white/5 rounded w-full" />
-                  <div className="h-3 bg-white/3 rounded w-2/3" />
-                </div>
-              </div>
-            </div>
-          </div>
+          <video 
+            src={PromoVideo}
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+          />
         </motion.div>
       </section>
 
