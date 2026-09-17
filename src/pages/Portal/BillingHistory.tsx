@@ -14,6 +14,7 @@ interface SubscriptionData {
   auto_renew: boolean;
   is_active: boolean;
   stripe_subscription_id: string | null;
+  trial_days?: number;
 }
 
 interface PaymentData {
@@ -114,7 +115,9 @@ export default function BillingHistory() {
     );
   }
 
-  const daysUntilExpiry = subscription?.current_period_end
+  const daysUntilExpiry = subscription?.status === 'TRIAL' && subscription.trial_days !== undefined
+    ? subscription.trial_days
+    : subscription?.current_period_end
     ? Math.max(0, Math.ceil((new Date(subscription.current_period_end).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : 0;
 
@@ -138,7 +141,7 @@ export default function BillingHistory() {
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-3">
               <h2 className="text-xl font-semibold text-[#1D1D1F] dark:text-white">
-                {subscription?.plan_name || 'No Plan'}
+                {subscription?.plan_name || (subscription?.status === 'TRIAL' ? 'Free Trial' : 'No Plan')}
               </h2>
               <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColors[subscription?.status || ''] || 'bg-gray-100 text-gray-800'}`}>
                 {subscription?.status}

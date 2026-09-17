@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState('');
+  const [downloadingPlatform, setDownloadingPlatform] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,6 +45,35 @@ export default function Dashboard() {
 
     fetchDashboardData();
   }, [navigate]);
+
+  const handleDownload = async (platform: string) => {
+    try {
+      setDownloadingPlatform(platform);
+      // Since the repo is public, we can fetch directly from GitHub API!
+      const res = await axios.get('https://api.github.com/repos/moriswala-burhanuddin/Invenza-Electron-app/releases/latest');
+      const assets = res.data.assets || [];
+      let url = null;
+      const ext = platform === 'windows' ? '.exe' : '.dmg';
+      
+      for (const asset of assets) {
+        if (asset.name.endsWith(ext)) {
+          url = asset.browser_download_url;
+          break;
+        }
+      }
+      
+      if (url) {
+        window.location.href = url;
+      } else {
+        alert(`No ${ext} file found in the latest release.`);
+      }
+    } catch (err: any) {
+      console.error(err);
+      alert('Failed to fetch the latest download link from GitHub.');
+    } finally {
+      setDownloadingPlatform(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -91,38 +121,50 @@ export default function Dashboard() {
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage your ERP installation and usage.</p>
               </div>
 
-              {/* Stats Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white dark:bg-[#0A0A0A] p-5 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
+              {/* App Downloads & Trial */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <button 
+                  onClick={() => handleDownload('windows')}
+                  disabled={downloadingPlatform === 'windows'}
+                  className="text-left bg-white dark:bg-[#0A0A0A] p-5 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm hover:border-[#0071E3] dark:hover:border-[#0071E3] transition-colors group flex flex-col justify-between relative overflow-hidden"
+                >
                   <div className="flex items-center gap-2 mb-3">
-                    <Download className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Downloads</span>
+                    {downloadingPlatform === 'windows' ? (
+                      <Loader2 className="w-4 h-4 text-[#0071E3] animate-spin" />
+                    ) : (
+                      <Download className="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-[#0071E3] transition-colors" />
+                    )}
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400 group-hover:text-[#0071E3] transition-colors">Download for Windows</span>
                   </div>
-                  <p className="text-2xl font-semibold text-gray-900 dark:text-white">2</p>
-                </div>
+                  <p className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-[#0071E3] transition-colors">Invenza ERP (.exe)</p>
+                </button>
                 
-                <div className="bg-white dark:bg-[#0A0A0A] p-5 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
+                <button 
+                  onClick={() => handleDownload('mac')}
+                  disabled={downloadingPlatform === 'mac'}
+                  className="text-left bg-white dark:bg-[#0A0A0A] p-5 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm hover:border-[#0071E3] dark:hover:border-[#0071E3] transition-colors group flex flex-col justify-between relative overflow-hidden"
+                >
                   <div className="flex items-center gap-2 mb-3">
-                    <MonitorPlay className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">App Logins</span>
+                    {downloadingPlatform === 'mac' ? (
+                      <Loader2 className="w-4 h-4 text-[#0071E3] animate-spin" />
+                    ) : (
+                      <Download className="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-[#0071E3] transition-colors" />
+                    )}
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400 group-hover:text-[#0071E3] transition-colors">Download for Mac</span>
                   </div>
-                  <p className="text-2xl font-semibold text-gray-900 dark:text-white">14</p>
-                </div>
+                  <p className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-[#0071E3] transition-colors">Invenza ERP (Universal)</p>
+                </button>
                 
-                <div className="bg-white dark:bg-[#0A0A0A] p-5 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
-                  <div className="flex items-center gap-2 mb-3">
-                    <History className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Last Login</span>
-                  </div>
-                  <p className="text-lg font-semibold text-gray-900 dark:text-white truncate">Today, 09:41</p>
-                </div>
-                
-                <div className="bg-white dark:bg-[#0A0A0A] p-5 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
+                <div className="bg-white dark:bg-[#0A0A0A] p-5 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm flex flex-col justify-between">
                   <div className="flex items-center gap-2 mb-3">
                     <Clock className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Trial Status</span>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Status</span>
                   </div>
-                  <p className="text-lg font-semibold text-gray-900 dark:text-white">{data.trial_days !== undefined ? `${data.trial_days} Days` : 'Active'}</p>
+                  <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                    {data.subscription_status === 'trial' && data.trial_days !== undefined 
+                      ? `${data.trial_days} Days Remaining` 
+                      : data.subscription_status.charAt(0).toUpperCase() + data.subscription_status.slice(1)}
+                  </p>
                 </div>
               </div>
 
