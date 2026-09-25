@@ -13,24 +13,11 @@ export default function Footer() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-24 gap-y-8">
-            <div>
-              <h4 className="text-[13px] font-semibold text-[#5F6368] uppercase tracking-wider mb-5">Product</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Download</a></li>
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Product</a></li>
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Docs</a></li>
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Changelog</a></li>
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Press</a></li>
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Releases</a></li>
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 gap-x-24 gap-y-8">
             <div>
               <h4 className="text-[13px] font-semibold text-[#5F6368] uppercase tracking-wider mb-5">Resources</h4>
               <ul className="space-y-3">
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Blog</a></li>
                 <li><Link to="/pricing" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Pricing</Link></li>
-                <li><a href="#" className="text-[15px] text-[#1D1D1F] dark:text-gray-300 hover:text-[#5F6368] dark:hover:text-white transition-colors">Use Cases</a></li>
               </ul>
             </div>
           </div>
@@ -47,8 +34,6 @@ export default function Footer() {
         <div className="border-t border-gray-200 dark:border-gray-800/50 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="font-semibold text-[15px] text-[#1D1D1F] dark:text-white">Invenza</span>
           <div className="flex flex-wrap gap-5 text-[13px] text-[#5F6368]">
-            <a href="#" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">About Invenza</a>
-            <a href="#" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Invenza Products</a>
             <Link to="/terms" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Terms</Link>
           </div>
