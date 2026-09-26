@@ -16,10 +16,15 @@ import Dashboard from './pages/Portal/Dashboard';
 import Pricing from './pages/Portal/Pricing';
 import BillingHistory from './pages/Portal/BillingHistory';
 import CheckoutSuccess from './pages/Portal/CheckoutSuccess';
+import Checkout from './pages/Portal/Checkout';
 import Settings from './pages/Portal/Settings';
 import Home from './pages/Home';
 import SetupCompany from './pages/Onboarding/SetupCompany';
-import TermsPrivacy from './pages/TermsPrivacy';
+import Terms from './pages/Policies/Terms';
+import Billing from './pages/Policies/Billing';
+import Cancellation from './pages/Policies/Cancellation';
+import Privacy from './pages/Policies/Privacy';
+import AcceptableUse from './pages/Policies/AcceptableUse';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import PortalLayout from './components/layout/PortalLayout';
@@ -64,7 +69,11 @@ export default function App() {
 
               {/* Public Routes */}
               <Route path="/pricing" element={<Pricing />} />
-              <Route path="/terms" element={<TermsPrivacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/billing-policy" element={<Billing />} />
+              <Route path="/cancellation-policy" element={<Cancellation />} />
+              <Route path="/privacy-policy" element={<Privacy />} />
+              <Route path="/acceptable-use" element={<AcceptableUse />} />
             </Route>
 
             {/* Portal Routes with Dedicated Layout */}
@@ -75,6 +84,7 @@ export default function App() {
               <Route element={<PortalLayout><Outlet /></PortalLayout>}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/billing-history" element={<BillingHistory />} />
+                <Route path="/checkout" element={<Checkout />} />
                 <Route path="/checkout-success" element={<CheckoutSuccess />} />
                 <Route path="/settings" element={<Settings />} />
               </Route>
