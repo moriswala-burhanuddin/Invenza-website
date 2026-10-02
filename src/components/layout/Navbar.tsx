@@ -39,21 +39,24 @@ export default function Navbar() {
           <span className="font-semibold text-xl tracking-tight text-[#1D1D1F] dark:text-white">Invenza</span>
         </Link>
 
-        <div className="flex items-center gap-6">
-          <Link to="/pricing" className="text-sm font-medium text-[#1D1D1F] dark:text-white hover:text-[#0071E3] transition-colors hidden md:block">
+        <div className="flex items-center gap-3 md:gap-5">
+          <Link to="/about" className={`text-sm font-medium transition-colors hidden md:block px-3 py-1.5 rounded-full ${location.pathname === '/about' ? 'bg-[#0071E3] text-white shadow-md shadow-[#0071E3]/20' : 'text-[#1D1D1F] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-[#0071E3] dark:hover:text-white'}`}>
+            About
+          </Link>
+          <Link to="/pricing" className={`text-sm font-medium transition-colors hidden md:block px-3 py-1.5 rounded-full ${location.pathname === '/pricing' ? 'bg-[#0071E3] text-white shadow-md shadow-[#0071E3]/20' : 'text-[#1D1D1F] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-[#0071E3] dark:hover:text-white'}`}>
             Pricing
           </Link>
           {isLoggedIn ? (
             <>
-              <Link to="/dashboard" className="flex items-center gap-2 text-sm font-medium text-[#1D1D1F] dark:text-white hover:text-[#0071E3] dark:hover:text-[#0071E3] transition-colors">
+              <Link to="/dashboard" className={`flex items-center gap-2 text-sm font-medium transition-colors px-3 py-1.5 rounded-full ${location.pathname.startsWith('/dashboard') ? 'bg-[#0071E3] text-white shadow-md shadow-[#0071E3]/20' : 'text-[#1D1D1F] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-[#0071E3] dark:hover:text-white'}`}>
                 <LayoutDashboard className="w-4 h-4" />
                 <span>Portal</span>
               </Link>
-              <Link to="/settings" className="flex items-center gap-2 text-sm font-medium text-[#1D1D1F] dark:text-white hover:text-[#0071E3] transition-colors">
+              <Link to="/settings" className={`flex items-center gap-2 text-sm font-medium transition-colors px-3 py-1.5 rounded-full ${location.pathname.startsWith('/settings') ? 'bg-[#0071E3] text-white shadow-md shadow-[#0071E3]/20' : 'text-[#1D1D1F] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-[#0071E3] dark:hover:text-white'}`}>
                 <Settings className="w-4 h-4" />
                 <span>Settings</span>
               </Link>
-              <div className="h-4 w-px bg-gray-200 dark:bg-gray-700"></div>
+              <div className="h-4 w-px bg-gray-200 dark:bg-gray-700 mx-1"></div>
               <button 
                 onClick={toggleTheme} 
                 className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -62,10 +65,10 @@ export default function Navbar() {
               </button>
               <button 
                 onClick={handleLogout}
-                className="flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-600 transition-colors"
+                className="flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 px-3 py-1.5 rounded-full transition-colors"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Logout</span>
+                <span className="hidden sm:inline">Logout</span>
               </button>
             </>
           ) : (
@@ -76,10 +79,10 @@ export default function Navbar() {
               >
                 {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
-              <Link to="/login" className="text-sm font-medium text-[#1D1D1F] dark:text-white hover:opacity-70 transition-opacity">
+              <Link to="/login" className={`text-sm font-medium px-4 py-2 rounded-full transition-colors ${location.pathname === '/login' ? 'bg-[#0071E3] text-white shadow-md shadow-[#0071E3]/20' : 'text-[#1D1D1F] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-[#0071E3] dark:hover:text-white'}`}>
                 Log in
               </Link>
-              <Link to="/signup" className="text-sm font-medium text-white bg-[#0071E3] px-4 py-2 rounded-full hover:bg-[#0077ED] transition-colors">
+              <Link to="/signup" className={`text-sm font-medium px-4 py-2 rounded-full transition-all border ${location.pathname === '/signup' ? 'bg-[#0071E3] text-white border-[#0071E3] shadow-md shadow-[#0071E3]/20' : 'border-gray-200 dark:border-white/10 text-[#1D1D1F] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-[#0071E3] dark:hover:text-white'}`}>
                 Sign up
               </Link>
             </>

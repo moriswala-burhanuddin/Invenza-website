@@ -324,6 +324,20 @@ export default function BillingHistory() {
           </div>
         )}
       </div>
+
+      {/* Cancellation & Refund Policy Disclaimer in Billing Dashboard */}
+      <div className="mt-8 bg-blue-50 dark:bg-[#1E293B] rounded-[20px] border border-blue-100 dark:border-blue-900/50 p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Important: Cancellation & Refund Terms</h3>
+        <p className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed mb-2">
+          Your Invenza ERP subscription is a strict <strong>12-month commitment</strong>. 
+          You may click <strong>Cancel Plan</strong> above at any time to stop the automatic renewal for the following year. 
+          However, because this is a discounted annual license, <strong>we do not offer prorated refunds for the current active term.</strong>
+        </p>
+        <p className="text-sm text-blue-800 dark:text-blue-200">
+          If you cancel, your access will simply remain fully active until the end of your billing cycle. 
+          For full details, please review our <a href="/cancellation-policy" className="underline font-medium hover:text-blue-900 dark:hover:text-white">Cancellation & Refund Policy</a>.
+        </p>
+      </div>
     </div>
   );
 }

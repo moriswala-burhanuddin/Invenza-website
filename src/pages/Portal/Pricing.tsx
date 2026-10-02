@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Check, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import api from '../../lib/api';
 import axios from 'axios';
 
@@ -204,19 +205,25 @@ export default function Pricing() {
 
               {/* Subscribe Button (Hidden if already subscribed) */}
               {!isCurrent ? (
-                <button
-                  onClick={handleSubscribe}
-                  disabled={loadingPlan === singleGroup.name}
-                  className={`w-full py-3.5 rounded-full font-medium transition-all ${
-                    loadingPlan === singleGroup.name
-                      ? 'bg-blue-400 text-white cursor-not-allowed'
-                      : 'bg-[#0071E3] text-white hover:bg-[#0077ED] hover:shadow-lg active:scale-95'
-                  }`}
-                >
-                  {loadingPlan === singleGroup.name
-                    ? 'Processing...'
-                    : 'Subscribe Now'}
-                </button>
+                <div className="flex flex-col items-center">
+                  <button
+                    onClick={handleSubscribe}
+                    disabled={loadingPlan === singleGroup.name}
+                    className={`w-full py-3.5 rounded-full font-medium transition-all ${
+                      loadingPlan === singleGroup.name
+                        ? 'bg-blue-400 text-white cursor-not-allowed'
+                        : 'bg-[#0071E3] text-white hover:bg-[#0077ED] hover:shadow-lg active:scale-95'
+                    }`}
+                  >
+                    {loadingPlan === singleGroup.name
+                      ? 'Processing...'
+                      : 'Subscribe Now'}
+                  </button>
+                  <p className="text-center text-xs text-[#86868B] mt-4 leading-relaxed">
+                    12-month commitment. Renews annually. <br/>
+                    Review our <Link to="/cancellation-policy" className="underline hover:text-[#1D1D1F] dark:hover:text-white">Cancellation & Refund Policy</Link>.
+                  </p>
+                </div>
               ) : (
                 <div className="w-full py-3.5 rounded-full font-medium text-center bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
                   ✓ Actively Subscribed
@@ -225,6 +232,25 @@ export default function Pricing() {
             </motion.div>
           </div>
         )}
+
+        {/* Dedicated Refund & Cancellation Policy Box */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="max-w-md mx-auto mb-20 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6"
+        >
+          <h3 className="text-[#1D1D1F] dark:text-white font-semibold mb-3 flex items-center gap-2">
+            <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Cancellation & Refund Terms
+          </h3>
+          <p className="text-sm text-[#5F6368] dark:text-[#A1A1A6] leading-relaxed">
+            Invenza ERP requires a strict <strong>12-month commitment</strong>. You may cancel your subscription renewal at any time to prevent future charges. However, <strong>we do not issue partial or prorated refunds</strong> for the current active billing year. Your access remains active until the end of the term. <br/><br/>
+            Read our complete <Link to="/cancellation-policy" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">Cancellation & Refund Policy</Link>.
+          </p>
+        </motion.div>
 
         {/* Features Table */}
         <motion.div

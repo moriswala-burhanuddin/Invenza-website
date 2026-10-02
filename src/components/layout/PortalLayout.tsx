@@ -87,6 +87,14 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       </div>
       
       <div className="p-4 border-t border-gray-200 dark:border-white/10 shrink-0">
+        <div className="flex flex-col gap-2.5 mb-4 px-3 text-xs font-medium text-gray-500 dark:text-gray-400">
+          <p className="text-gray-400 dark:text-gray-500 mb-1">LEGAL & POLICIES</p>
+          <Link to="/cancellation-policy" className="hover:text-gray-900 dark:hover:text-white transition-colors">Cancellation & Refunds</Link>
+          <Link to="/terms" className="hover:text-gray-900 dark:hover:text-white transition-colors">Terms of Service</Link>
+          <Link to="/privacy-policy" className="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy Policy</Link>
+          <Link to="/sla" className="hover:text-gray-900 dark:hover:text-white transition-colors">SLA</Link>
+          <Link to="/data-processing-agreement" className="hover:text-gray-900 dark:hover:text-white transition-colors">Data Processing</Link>
+        </div>
         <button 
           onClick={handleLogout}
           className="flex w-full items-center gap-3 px-3 py-2 rounded-lg text-[14px] font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"

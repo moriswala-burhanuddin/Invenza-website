@@ -33,9 +33,15 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-gray-200 dark:border-gray-800/50 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="font-semibold text-[15px] text-[#1D1D1F] dark:text-white">Invenza</span>
-          <div className="flex flex-wrap gap-5 text-[13px] text-[#5F6368]">
-            <Link to="/terms" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Privacy</Link>
-            <Link to="/terms" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Terms</Link>
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-[13px] text-[#5F6368]">
+            <Link to="/terms" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Terms & Conditions</Link>
+            <Link to="/privacy-policy" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/billing-policy" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Billing Policy</Link>
+            <Link to="/cancellation-policy" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Cancellation & Refunds</Link>
+            <Link to="/acceptable-use" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Acceptable Use</Link>
+            <Link to="/cookie-policy" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Cookie Policy</Link>
+            <Link to="/sla" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">SLA</Link>
+            <Link to="/data-processing-agreement" className="hover:text-[#1D1D1F] dark:hover:text-white transition-colors">DPA</Link>
           </div>
         </div>
 

@@ -791,6 +791,26 @@ export default function Home() {
   const dataMeshRef = useRef<HTMLElement>(null);
   const downloadCtaRef = useRef<HTMLDivElement>(null);
 
+  // --- Video Lazy Loading ---
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVideoVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   // Hero parallax — content drifts up faster than scroll
   const heroParallaxY = useTransform(smoothScrollY, [0, 800], [0, -150]);
   // (heroOpacity removed per user request)
@@ -943,6 +963,19 @@ const dlRotateX = useTransform(dlProgress, [0.1, 0.5], [4, 0]);
             </div>
           </div>
         </motion.div>
+
+        {/* Built by Sysfotech Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="mt-16 text-center z-10 relative flex flex-col items-center justify-center"
+        >
+          <span className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-3">Proudly developed and maintained by</span>
+          <Link to="/about" className="group">
+            <img src="/src/assets/sysfotech-logo.png" alt="Sysfotech Logo" className="h-8 md:h-10 opacity-70 group-hover:opacity-100 transition-all dark:bg-white/95 rounded-lg px-3 py-1 shadow-sm" />
+          </Link>
+        </motion.div>
       </section>
 
       {/* ===== 2. VIDEO SCROLL-UP SECTION ===== */}
@@ -952,12 +985,14 @@ const dlRotateX = useTransform(dlProgress, [0.1, 0.5], [4, 0]);
           className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#1D1D1F] rounded-[24px] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.3)] relative group cursor-pointer"
         >
           <video 
-            src={PromoVideo}
+            ref={videoRef}
+            src={isVideoVisible ? PromoVideo : undefined}
             className="absolute inset-0 w-full h-full object-cover"
-            autoPlay 
+            autoPlay={isVideoVisible}
             loop 
             muted 
             playsInline
+            preload="none"
           />
         </motion.div>
       </section>
