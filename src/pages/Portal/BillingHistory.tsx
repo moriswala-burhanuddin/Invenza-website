@@ -162,7 +162,9 @@ export default function BillingHistory() {
                 </p>
               </div>
               <div>
-                <p className="text-xs text-[#86868B] mb-1">Next Billing Date</p>
+                <p className="text-xs text-[#86868B] mb-1">
+                  {subscription?.cancel_at_period_end ? 'End Date' : 'Next Billing Date'}
+                </p>
                 <p className="text-sm font-medium text-[#1D1D1F] dark:text-white flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-[#86868B]" />
                   {formatDate(subscription?.current_period_end || null)}

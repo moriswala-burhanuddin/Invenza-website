@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import api from '../../lib/api';
 import axios from 'axios';
+import { COUNTRIES, isValidPhone, normalizePhone } from '../../lib/countries';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
 
@@ -47,6 +48,12 @@ export default function Pricing() {
   const [loading, setLoading] = useState(true);
   const [currentPlanName, setCurrentPlanName] = useState<string | null>(null);
   const [currentBillingInterval, setCurrentBillingInterval] = useState<string | null>(null);
+
+  // Billing details (phone + country) collected before redirecting to Stripe
+  const [showDetails, setShowDetails] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [country, setCountry] = useState('');
+  const [detailsError, setDetailsError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -98,17 +105,45 @@ export default function Pricing() {
       return;
     }
 
+    // Pre-fill with saved details (blank for accounts created before this was collected)
+    setError(null);
+    setDetailsError(null);
+    try {
+      const res = await api.get('/billing/billing-details/');
+      setPhone(res.data.phone || '');
+      setCountry(res.data.country || '');
+    } catch {
+      // Non-fatal: user can still fill the form manually
+    }
+    setShowDetails(true);
+  };
+
+  const handleConfirmDetails = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!singleGroup) return;
+
+    if (!country) {
+      setDetailsError('Please select your country.');
+      return;
+    }
+    if (!isValidPhone(phone)) {
+      setDetailsError('Enter a valid phone number including country code (e.g. +44 7700 900123).');
+      return;
+    }
+
     const activePlan = singleGroup.monthlyPlan;
     setLoadingPlan(singleGroup.name);
-    setError(null);
+    setDetailsError(null);
     try {
       const response = await api.post('/billing/create-checkout-session/', {
         plan_id: activePlan.id,
         billing_interval: 'year',
+        phone: normalizePhone(phone),
+        country,
       });
       window.location.href = response.data.checkout_url;
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to start checkout. Please try again.');
+      setDetailsError(err.response?.data?.error || 'Failed to start checkout. Please try again.');
       setLoadingPlan(null);
     }
   };
@@ -292,6 +327,94 @@ export default function Pricing() {
           </motion.div>
         )}
       </div>
+
+      {/* Billing Details Modal */}
+      <AnimatePresence>
+        {showDetails && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
+            onClick={() => !loadingPlan && setShowDetails(false)}
+          >
+            <motion.form
+              id="billing-details-form"
+              initial={{ opacity: 0, y: 20, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              onSubmit={handleConfirmDetails}
+              className="w-full max-w-md bg-white dark:bg-[#1D1D1F] rounded-[28px] shadow-2xl p-8"
+            >
+              <h2 className="text-2xl font-semibold text-[#1D1D1F] dark:text-white tracking-tight mb-1">
+                Billing details
+              </h2>
+              <p className="text-sm text-[#86868B] mb-6">
+                We need your phone number and country to set up your subscription.
+              </p>
+
+              <label htmlFor="billing-country" className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">
+                Country
+              </label>
+              <select
+                id="billing-country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                className="w-full mb-4 px-4 py-3 rounded-xl border border-black/10 dark:border-white/15 bg-white dark:bg-black text-[#1D1D1F] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]"
+              >
+                <option value="">Select your country</option>
+                {COUNTRIES.map((c) => (
+                  <option key={c.code} value={c.code}>{c.name}</option>
+                ))}
+              </select>
+
+              <label htmlFor="billing-phone" className="block text-sm font-medium text-[#1D1D1F] dark:text-white mb-1.5">
+                Phone number
+              </label>
+              <input
+                id="billing-phone"
+                type="tel"
+                autoComplete="tel"
+                placeholder="+44 7700 900123"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full mb-2 px-4 py-3 rounded-xl border border-black/10 dark:border-white/15 bg-white dark:bg-black text-[#1D1D1F] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0071E3]"
+              />
+              <p className="text-xs text-[#86868B] mb-4">Include your country code, e.g. +44.</p>
+
+              {detailsError && (
+                <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-sm">
+                  {detailsError}
+                </div>
+              )}
+
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  id="billing-details-cancel"
+                  disabled={!!loadingPlan}
+                  onClick={() => setShowDetails(false)}
+                  className="flex-1 py-3 rounded-full font-medium border border-black/10 dark:border-white/15 text-[#1D1D1F] dark:text-white hover:bg-gray-50 dark:hover:bg-white/5 transition-all disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  id="billing-details-continue"
+                  disabled={!!loadingPlan}
+                  className={`flex-1 py-3 rounded-full font-medium text-white transition-all ${
+                    loadingPlan ? 'bg-blue-400 cursor-not-allowed' : 'bg-[#0071E3] hover:bg-[#0077ED] hover:shadow-lg active:scale-95'
+                  }`}
+                >
+                  {loadingPlan ? 'Processing...' : 'Continue to payment'}
+                </button>
+              </div>
+            </motion.form>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

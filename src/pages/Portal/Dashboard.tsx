@@ -222,7 +222,9 @@ export default function Dashboard() {
                     </div>
                     {(data.subscription_status === 'active' && data.expiry_date) ? (
                       <div className="flex justify-between items-center py-2">
-                        <span className="text-sm text-gray-500 dark:text-gray-400">Next Billing</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {data.cancel_at_period_end ? 'End Date' : 'Next Billing'}
+                        </span>
                         <span className="text-sm font-medium text-gray-900 dark:text-white flex items-center gap-1.5">
                           <Calendar className="w-3.5 h-3.5 text-gray-400" />
                           {new Date(data.expiry_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
