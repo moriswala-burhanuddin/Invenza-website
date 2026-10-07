@@ -4,6 +4,7 @@ import { Play, Sparkles, Code, Terminal, Copy, Upload, Command, CornerDownLeft, 
 import { Link } from 'react-router-dom';
 import Testimonials from '../components/sections/Testimonials';
 import invenzaLogo from '../assets/invenza-bg.png';
+import sysfotechLogo from '../assets/sysfotech-logo.png';
 import PromoVideo from '../assets/VIDEO/InvenzaPromo.mp4';
 
 // ---------------------------------------------------------
@@ -973,7 +974,7 @@ const dlRotateX = useTransform(dlProgress, [0.1, 0.5], [4, 0]);
         >
           <span className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-3">Proudly developed and maintained by</span>
           <Link to="/about" className="group">
-            <img src="/src/assets/sysfotech-logo.png" alt="Sysfotech Logo" className="h-8 md:h-10 opacity-70 group-hover:opacity-100 transition-all dark:bg-white/95 rounded-lg px-3 py-1 shadow-sm" />
+            <img src={sysfotechLogo} alt="Sysfotech Logo" className="h-8 md:h-10 opacity-70 group-hover:opacity-100 transition-all dark:bg-white/95 rounded-lg px-3 py-1 shadow-sm" />
           </Link>
         </motion.div>
       </section>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import sysfotechLogo from '../assets/sysfotech-logo.png';
 
 // Using the exact interactive particles from the Home page's Download section
 const InteractiveParticles = ({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) => {
@@ -138,7 +139,7 @@ export default function About() {
           {/* Top Section: Logo */}
           <div className="relative z-10 flex justify-between items-start">
             <div className="bg-white/95 border border-white/20 rounded-2xl p-4 shadow-2xl">
-              <img src="/src/assets/sysfotech-logo.png" alt="Sysfotech Logo" className="h-10 md:h-14 object-contain" />
+              <img src={sysfotechLogo} alt="Sysfotech Logo" className="h-10 md:h-14 object-contain" />
             </div>
             <a 
               href="https://sysfotech.uk/" 
